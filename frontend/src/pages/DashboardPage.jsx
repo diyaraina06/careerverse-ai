@@ -4,6 +4,8 @@ function DashboardPage() {
     const location = useLocation();
 
     const selectedCareer = location.state?.selectedCareer;
+    const username =
+        localStorage.getItem("careerverse_username") || "Student";
     return (
         <div className="min-h-screen bg-black text-white px-6 py-20">
 
@@ -14,7 +16,7 @@ function DashboardPage() {
                 </p>
 
                 <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-                    Your Career Exploration Results
+                    {username}'s Career Exploration Results
                 </h1>
 
                 <p className="text-gray-400 text-lg max-w-3xl mb-16">

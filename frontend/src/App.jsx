@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 
+import WelcomePage from "./pages/WelcomePage";
 import WhyChooseUs from "./components/WhyChooseUs";
 import Navbar from "./components/Navbar";
 import HeroSection from "./components/HeroSection";
@@ -29,7 +30,9 @@ function App() {
   return (
     <Routes>
 
-      <Route path="/" element={<HomePage />} />
+      <Route path="/" element={<WelcomePage />} />
+
+      <Route path="/home" element={<HomePage />} />
 
       <Route path="/quiz" element={<QuizPage />} />
 
