@@ -34,6 +34,14 @@ function SimulationPage() {
 
         cache:
             "Great technical thinking! Caching can significantly reduce load times and improve user experience during peak traffic.",
+        navigation:
+            "Excellent UX thinking! Simplifying navigation improves usability and helps users complete tasks more efficiently.",
+
+        colors:
+            "Strong accessibility mindset! Better color contrast improves readability and creates a more inclusive user experience.",
+
+        layout:
+            "Creative design approach! Redesigning layouts can greatly improve engagement and overall user satisfaction.",
     };
     useEffect(() => {
         if (!selected) return;
@@ -168,40 +176,73 @@ function SimulationPage() {
                                 </>
                             )}
 
-                            {(selectedCareer === "Product Manager" ||
-                                selectedCareer === "UI/UX Designer") && (
-                                    <>
-                                        <button
-                                            onClick={() => setSelected("onboarding")}
-                                            className={`py-4 md:py-5 px-5 md:px-6 rounded-2xl text-left transition ${selected === "onboarding"
-                                                ? "bg-purple-500"
-                                                : "bg-zinc-800 hover:bg-purple-500"
-                                                }`}
-                                        >
-                                            Improve onboarding experience
-                                        </button>
+                            {selectedCareer === "Product Manager" && (
+                                <>
+                                    <button
+                                        onClick={() => setSelected("onboarding")}
+                                        className={`py-4 md:py-5 px-5 md:px-6 rounded-2xl text-left transition ${selected === "onboarding"
+                                            ? "bg-purple-500"
+                                            : "bg-zinc-800 hover:bg-purple-500"
+                                            }`}
+                                    >
+                                        Improve onboarding experience
+                                    </button>
 
-                                        <button
-                                            onClick={() => setSelected("notifications")}
-                                            className={`py-4 md:py-5 px-5 md:px-6 rounded-2xl text-left transition ${selected === "notifications"
-                                                ? "bg-purple-500"
-                                                : "bg-zinc-800 hover:bg-purple-500"
-                                                }`}
-                                        >
-                                            Add more notifications
-                                        </button>
+                                    <button
+                                        onClick={() => setSelected("notifications")}
+                                        className={`py-4 md:py-5 px-5 md:px-6 rounded-2xl text-left transition ${selected === "notifications"
+                                            ? "bg-purple-500"
+                                            : "bg-zinc-800 hover:bg-purple-500"
+                                            }`}
+                                    >
+                                        Add more notifications
+                                    </button>
 
-                                        <button
-                                            onClick={() => setSelected("referrals")}
-                                            className={`py-4 md:py-5 px-5 md:px-6 rounded-2xl text-left transition ${selected === "referrals"
-                                                ? "bg-purple-500"
-                                                : "bg-zinc-800 hover:bg-purple-500"
-                                                }`}
-                                        >
-                                            Launch referral rewards
-                                        </button>
-                                    </>
-                                )}
+                                    <button
+                                        onClick={() => setSelected("referrals")}
+                                        className={`py-4 md:py-5 px-5 md:px-6 rounded-2xl text-left transition ${selected === "referrals"
+                                            ? "bg-purple-500"
+                                            : "bg-zinc-800 hover:bg-purple-500"
+                                            }`}
+                                    >
+                                        Launch referral rewards
+                                    </button>
+                                </>
+                            )}
+
+                            {selectedCareer === "UI/UX Designer" && (
+                                <>
+                                    <button
+                                        onClick={() => setSelected("navigation")}
+                                        className={`py-4 md:py-5 px-5 md:px-6 rounded-2xl text-left transition ${selected === "navigation"
+                                            ? "bg-purple-500"
+                                            : "bg-zinc-800 hover:bg-purple-500"
+                                            }`}
+                                    >
+                                        Simplify navigation flow
+                                    </button>
+
+                                    <button
+                                        onClick={() => setSelected("colors")}
+                                        className={`py-4 md:py-5 px-5 md:px-6 rounded-2xl text-left transition ${selected === "colors"
+                                            ? "bg-purple-500"
+                                            : "bg-zinc-800 hover:bg-purple-500"
+                                            }`}
+                                    >
+                                        Improve color contrast
+                                    </button>
+
+                                    <button
+                                        onClick={() => setSelected("layout")}
+                                        className={`py-4 md:py-5 px-5 md:px-6 rounded-2xl text-left transition ${selected === "layout"
+                                            ? "bg-purple-500"
+                                            : "bg-zinc-800 hover:bg-purple-500"
+                                            }`}
+                                    >
+                                        Redesign screen layout
+                                    </button>
+                                </>
+                            )}
 
                         </div>
                         {selected && (

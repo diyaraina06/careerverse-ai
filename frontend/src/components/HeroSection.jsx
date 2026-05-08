@@ -27,9 +27,12 @@ function HeroSection() {
                     </button>
                 </Link>
 
-                <button className="w-full sm:w-auto border border-gray-700 hover:border-purple-500 px-8 py-4 rounded-2xl font-semibold text-lg transition">
+                <a
+                    href="#demo"
+                    className="w-full sm:w-auto border border-gray-700 hover:border-purple-500 px-8 py-4 rounded-2xl font-semibold text-lg transition text-center"
+                >
                     Watch Demo
-                </button>
+                </a>
             </div>
 
         </section>
