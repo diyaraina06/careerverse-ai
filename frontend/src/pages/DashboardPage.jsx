@@ -172,6 +172,40 @@ function DashboardPage() {
                     </p>
 
                 </div>
+                <div className="mt-16 bg-gradient-to-r from-purple-500/10 to-blue-500/10 border border-purple-500/20 rounded-3xl p-10">
+
+                    <p className="text-purple-400 font-semibold mb-4">
+                        PARENT INSIGHT SUMMARY
+                    </p>
+
+                    <h2 className="text-3xl font-bold mb-6">
+                        Helping Parents Support Better Career Decisions
+                    </h2>
+
+                    <p className="text-gray-300 leading-relaxed text-lg">
+                        CareerVerse AI helps parents better understand their child’s
+                        interests, strengths, and decision-making patterns through
+                        personalized career insights and interactive simulations.
+                    </p>
+
+                </div>
+                <div className="mt-16 bg-gradient-to-r from-purple-500/10 to-blue-500/10 border border-purple-500/20 rounded-3xl p-10">
+
+                    <p className="text-purple-400 font-semibold mb-4">
+                        COUNSELLOR SUPPORT SYSTEM
+                    </p>
+
+                    <h2 className="text-3xl font-bold mb-6">
+                        Scalable Career Guidance For Schools
+                    </h2>
+
+                    <p className="text-gray-300 leading-relaxed text-lg">
+                        CareerVerse AI enables school counsellors to guide large numbers
+                        of students efficiently through AI-powered assessments,
+                        simulations, and personalized career insights.
+                    </p>
+
+                </div>
 
             </div>
 
