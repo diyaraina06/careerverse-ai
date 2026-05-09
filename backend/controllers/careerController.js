@@ -24,7 +24,7 @@ Student profile:
 - Awareness: ${profile.awareness}
 
 RULES:
-- Return ONLY a raw JSON array with exactly 5 careers.
+- Return ONLY a raw JSON array with exactly 3 careers.
 - Do NOT wrap output in markdown or triple backticks.
 - Do NOT include extra commentary text.
 - reason must mention specific profile answers.
