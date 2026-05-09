@@ -7,7 +7,7 @@ import HeroSection from "./components/HeroSection";
 import HowItWorks from "./components/HowItWorks";
 import SimulationPreview from "./components/SimulationPreview";
 import StatsSection from "./components/StatsSection";
-
+import DigitalMarketingSimulation from "./pages/DigitalMarketingSimulation";
 import QuizPage from "./pages/QuizPage";
 import CareerResultsPage from "./pages/CareerResultsPage";
 import SimulationPage from "./pages/SimulationPage";
@@ -41,6 +41,11 @@ function App() {
       <Route path="/simulation" element={<SimulationPage />} />
 
       <Route path="/dashboard" element={<DashboardPage />} />
+
+      <Route
+        path="/digital-marketing-simulation"
+        element={<DigitalMarketingSimulation />}
+      />
 
     </Routes>
   );
