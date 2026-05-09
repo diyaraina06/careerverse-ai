@@ -412,8 +412,11 @@ export default function SimulationPage() {
             </div>
           </div>
           <div className="flex gap-3">
-            <button onClick={() => navigate(-1)} className="flex-1 border border-zinc-800 hover:border-zinc-600 transition py-3.5 rounded-2xl font-bold text-sm">
-              ← Other careers
+            <button
+              onClick={() => navigate("/simulation/review")}
+              className="flex-1 border border-zinc-800 hover:border-zinc-600 transition py-3.5 rounded-2xl font-bold text-sm"
+            >
+              Review Simulation
             </button>
             <button
               onClick={() => { setSceneIndex(0); setPhase("intro"); setTraits([]); setChosenOption(null); setAiResponse(""); }}

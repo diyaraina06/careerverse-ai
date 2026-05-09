@@ -501,10 +501,10 @@ export default function DigitalMarketingSimulation() {
 
           <div className="flex gap-3">
             <button
-              onClick={() => navigate(-1)}
+              onClick={() => navigate("/simulation/review")}
               className="flex-1 border border-zinc-800 hover:border-zinc-600 transition py-3.5 rounded-2xl font-bold text-sm"
             >
-              ← Other careers
+              Review Simulation
             </button>
             <button
               onClick={() => { setSceneIndex(0); setPhase("intro"); setTraits([]); setChosenOption(null); setAiResponse(""); }}

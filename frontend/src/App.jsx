@@ -12,6 +12,7 @@ import CareerResultsPage from "./pages/CareerResultsPage";
 import DigitalMarketingSimulation from "./pages/DigitalMarketingSimulation";
 import SimulationPage from "./pages/SESimulation";
 import DashboardPage from "./pages/DashboardPage";
+import SimulationReview from "./pages/SimulationReview";
 
 function HomePage() {
   return (
@@ -43,11 +44,8 @@ function App() {
 
 
       <Route path="/dashboard" element={<DashboardPage />} />
-
-      <Route
-        path="/digital-marketing-simulation"
-        element={<DigitalMarketingSimulation />}
-      />
+      <Route path="/simulation/review" element={<SimulationReview />} />
+      
 
     </Routes>
   );
