@@ -7,10 +7,10 @@ import HeroSection from "./components/HeroSection";
 import HowItWorks from "./components/HowItWorks";
 import SimulationPreview from "./components/SimulationPreview";
 import StatsSection from "./components/StatsSection";
-import DigitalMarketingSimulation from "./pages/DigitalMarketingSimulation";
 import QuizPage from "./pages/QuizPage";
 import CareerResultsPage from "./pages/CareerResultsPage";
-import SimulationPage from "./pages/SimulationPage";
+import DigitalMarketingSimulation from "./pages/DigitalMarketingSimulation";
+import SimulationPage from "./pages/SESimulation";
 import DashboardPage from "./pages/DashboardPage";
 
 function HomePage() {
@@ -38,7 +38,9 @@ function App() {
 
       <Route path="/results" element={<CareerResultsPage />} />
 
-      <Route path="/simulation" element={<SimulationPage />} />
+      <Route path="/simulation/software" element={<SimulationPage />} />
+      <Route path="/simulation/marketing" element={<DigitalMarketingSimulation />} />
+
 
       <Route path="/dashboard" element={<DashboardPage />} />
 

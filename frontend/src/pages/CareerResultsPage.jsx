@@ -83,15 +83,19 @@ function CareerResultsPage() {
               </p>
 
               <button
-                onClick={() =>
-                  navigate("/simulation", {
-                    state: { career },
-                  })
-                }
-                className="w-full bg-purple-500 hover:bg-purple-600 transition py-3 rounded-2xl font-semibold"
-              >
-                Try Simulation →
-              </button>
+  onClick={() => {
+    if (career.title.toLowerCase().includes("software")) {
+      navigate("/simulation/software", { state: { career } });
+    } else if (career.title.toLowerCase().includes("marketing")) {
+      navigate("/simulation/marketing", { state: { career } });
+    } else {
+      alert("Simulation not available for this career yet!");
+    }
+  }}
+  className="w-full bg-purple-500 hover:bg-purple-600 transition py-3 rounded-2xl font-semibold"
+>
+  Try Simulation →
+</button>
 
             </div>
           ))}

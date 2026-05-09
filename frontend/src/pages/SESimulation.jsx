@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-// ── Scenes ───────────────────────────────────────────────────────────────────
 const scenes = [
   {
     id: 1,
@@ -12,20 +11,8 @@ const scenes = [
     context:
       "First day. You haven't even finished your coffee. Slack blows up — the payment screen is crashing for every Android user. Your team lead is stuck in an investor call. You're the only dev available.",
     slackMessages: [
-      {
-        sender: "Priya · Tech Lead",
-        avatar: "P",
-        avatarColor: "bg-purple-500",
-        time: "9:11 AM",
-        text: "hey you there? we're getting 400+ crash reports in the last 10 mins. android only. payments page. i'm stuck in a call can you look??",
-      },
-      {
-        sender: "Rohan · Product",
-        avatar: "R",
-        avatarColor: "bg-blue-500",
-        time: "9:13 AM",
-        text: "this is bad. we're losing ₹2L/min. someone please fix asap 🚨",
-      },
+      { sender: "Priya · Tech Lead", avatar: "P", avatarColor: "bg-purple-500", time: "9:11 AM", text: "hey you there? we're getting 400+ crash reports in the last 10 mins. android only. payments page. i'm stuck in a call can you look??" },
+      { sender: "Rohan · Product", avatar: "R", avatarColor: "bg-blue-500", time: "9:13 AM", text: "this is bad. we're losing ₹2L/min. someone please fix asap 🚨" },
     ],
     errorLog: `FATAL: Unhandled Promise Rejection
   PaymentGateway.charge() → null reference
@@ -83,20 +70,8 @@ async function processPayment(userId, amount) {
     context:
       "The designer wants the checkout button to have a beautiful animated gradient that shifts colors. You've clocked that it'll add 340ms to every page load. Slower phones — mostly budget Android users — will feel it. The designer says it's non-negotiable brand identity.",
     slackMessages: [
-      {
-        sender: "Arjun · Designer",
-        avatar: "A",
-        avatarColor: "bg-pink-500",
-        time: "3:41 PM",
-        text: "bro the gradient is staying. i spent 3 days on this. it's in the brand guidelines. just optimise the code better",
-      },
-      {
-        sender: "Priya · Tech Lead",
-        avatar: "P",
-        avatarColor: "bg-purple-500",
-        time: "3:44 PM",
-        text: "you two need to sort this out before EOD. i'm not deciding for you 😅",
-      },
+      { sender: "Arjun · Designer", avatar: "A", avatarColor: "bg-pink-500", time: "3:41 PM", text: "bro the gradient is staying. i spent 3 days on this. it's in the brand guidelines. just optimise the code better" },
+      { sender: "Priya · Tech Lead", avatar: "P", avatarColor: "bg-purple-500", time: "3:44 PM", text: "you two need to sort this out before EOD. i'm not deciding for you 😅" },
     ],
     choices: [
       { text: "Show Arjun the actual performance data — let the numbers talk", trait: "data-driven", hint: "Evidence-based" },
@@ -114,13 +89,7 @@ async function processPayment(userId, amount) {
     context:
       "It's 6:30 PM. The CEO just messaged the whole team: investor demo is tomorrow at 10 AM and they want to show the new analytics dashboard. You've built 40% of it. Realistically it needs 2 more full days. Everyone's looking at you.",
     slackMessages: [
-      {
-        sender: "Vikram · CEO",
-        avatar: "V",
-        avatarColor: "bg-yellow-500",
-        time: "6:28 PM",
-        text: "team — demo tmrw 10am with Sequoia. they specifically want to see the new dashboard. can we make it happen? what do we need?",
-      },
+      { sender: "Vikram · CEO", avatar: "V", avatarColor: "bg-yellow-500", time: "6:28 PM", text: "team — demo tmrw 10am with Sequoia. they specifically want to see the new dashboard. can we make it happen? what do we need?" },
     ],
     choices: [
       { text: "Say yes — pull an all-nighter, ship a working version by 9 AM", trait: "ambitious", hint: "Goes all in" },
@@ -129,17 +98,9 @@ async function processPayment(userId, amount) {
       { text: "Propose shipping just the key chart — cut scope, hit the deadline", trait: "pragmatic", hint: "Scope cutter" },
     ],
   },
-  {
-    id: 5,
-    day: "Friday · 10:02 AM",
-    label: "FINALE",
-    title: "It shipped.",
-    emoji: "🚀",
-    isFinal: true,
-  },
+  { id: 5, day: "Friday · 10:02 AM", label: "FINALE", title: "It shipped.", emoji: "🚀", isFinal: true },
 ];
 
-// ── Typing effect ─────────────────────────────────────────────────────────────
 function useTypingEffect(text, speed = 14, trigger = true) {
   const [displayed, setDisplayed] = useState("");
   const [done, setDone] = useState(false);
@@ -157,7 +118,6 @@ function useTypingEffect(text, speed = 14, trigger = true) {
   return { displayed, done };
 }
 
-// ── AI call ───────────────────────────────────────────────────────────────────
 async function getAIResponse(scene, choice) {
   const prompt = `
 You are narrating a career simulation for a 15-17 year old exploring software development.
@@ -183,7 +143,6 @@ Write a mentor response (max 55 words). Rules:
   return data.text;
 }
 
-// ── Trait config ──────────────────────────────────────────────────────────────
 const TRAIT_COLORS = {
   decisive:      "text-red-400 border-red-400/30 bg-red-400/10",
   analytical:    "text-blue-400 border-blue-400/30 bg-blue-400/10",
@@ -215,7 +174,6 @@ const DEV_TYPES = {
   methodical:    { type: "The Reliable One",     desc: "Slow and steady wins. You're the dev everyone trusts with critical code." },
 };
 
-// ── CSS ───────────────────────────────────────────────────────────────────────
 const CSS = `
   @keyframes fadeup {
     from { opacity:0; transform:translateY(18px); }
@@ -241,20 +199,18 @@ const CSS = `
   .anim-fadein  { animation: fadein  0.35s ease forwards; }
 `;
 
-// ── Main Component ────────────────────────────────────────────────────────────
 export default function SimulationPage() {
   const location = useLocation();
   const navigate = useNavigate();
   const career = location.state?.career;
 
-  const [sceneIndex, setSceneIndex]   = useState(0);
-  const [phase, setPhase]             = useState("intro");
-  const [chosenOption, setChosenOption] = useState(null);
-  const [aiResponse, setAiResponse]   = useState("");
-  const [aiLoading, setAiLoading]     = useState(false);
-  const [traits, setTraits]           = useState([]);
-  const [toast, setToast]             = useState(null);
-  const [entering, setEntering]       = useState(false);
+  const [sceneIndex, setSceneIndex]       = useState(0);
+  const [phase, setPhase]                 = useState("intro");
+  const [chosenOption, setChosenOption]   = useState(null);
+  const [aiResponse, setAiResponse]       = useState("");
+  const [aiLoading, setAiLoading]         = useState(false);
+  const [traits, setTraits]               = useState([]);
+  const [toast, setToast]                 = useState(null);
   const [hoveredChoice, setHoveredChoice] = useState(null);
   const resultRef = useRef(null);
   const scene = scenes[sceneIndex];
@@ -262,12 +218,6 @@ export default function SimulationPage() {
   const { displayed: typedResponse, done: typingDone } = useTypingEffect(
     aiResponse, 13, phase === "result"
   );
-
-  useEffect(() => {
-    setEntering(true);
-    const t = setTimeout(() => setEntering(false), 50);
-    return () => clearTimeout(t);
-  }, [sceneIndex, phase]);
 
   const showToast = (trait) => {
     setToast(trait);
@@ -294,14 +244,11 @@ export default function SimulationPage() {
   };
 
   const handleNext = () => {
-    setEntering(true);
-    setTimeout(() => {
-      const next = sceneIndex + 1;
-      setSceneIndex(next);
-      setPhase(scenes[next]?.isFinal ? "final" : "scene");
-      setChosenOption(null);
-      setAiResponse("");
-    }, 300);
+    const next = sceneIndex + 1;
+    setSceneIndex(next);
+    setPhase(scenes[next]?.isFinal ? "final" : "scene");
+    setChosenOption(null);
+    setAiResponse("");
   };
 
   const getPersonality = () => {
@@ -311,7 +258,6 @@ export default function SimulationPage() {
     return DEV_TYPES[top] ?? { type: "The Versatile Dev", desc: "You adapt to anything. That's the rarest and most valuable skill in tech." };
   };
 
-  // ── Guard: no career ──────────────────────────────────────────────────────
   if (!career) {
     return (
       <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center gap-4">
@@ -323,57 +269,45 @@ export default function SimulationPage() {
     );
   }
 
-  // ── Guard: no simulation for this career ──────────────────────────────────
   if (!career.title?.toLowerCase().includes("software")) {
     return (
       <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center px-6 text-center gap-6">
         <style>{CSS}</style>
         <span className="text-5xl">🚧</span>
         <h2 className="text-3xl font-bold">
-          Simulation coming soon for{" "}
-          <span className="text-purple-400">{career.title}</span>
+          Simulation coming soon for <span className="text-purple-400">{career.title}</span>
         </h2>
         <p className="text-gray-400 max-w-md">
           We're building immersive simulations for every career. Software Engineer is ready right now — more dropping soon.
         </p>
         <div className="flex gap-3">
-          <button onClick={() => navigate(-1)} className="border border-zinc-700 hover:border-purple-500 transition px-6 py-3 rounded-2xl font-semibold">
-            ← Back
-          </button>
-          <button onClick={() => navigate("/quiz")} className="bg-purple-500 hover:bg-purple-600 transition px-6 py-3 rounded-2xl font-semibold">
-            Retake quiz
-          </button>
+          <button onClick={() => navigate(-1)} className="border border-zinc-700 hover:border-purple-500 transition px-6 py-3 rounded-2xl font-semibold">← Back</button>
+          <button onClick={() => navigate("/quiz")} className="bg-purple-500 hover:bg-purple-600 transition px-6 py-3 rounded-2xl font-semibold">Retake quiz</button>
         </div>
       </div>
     );
   }
 
-  // ── INTRO ─────────────────────────────────────────────────────────────────
   if (phase === "intro") {
     return (
       <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center px-6 py-20 relative overflow-hidden">
         <style>{CSS}</style>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full pointer-events-none"
           style={{ background: "radial-gradient(circle, rgba(168,85,247,0.12) 0%, transparent 70%)" }} />
-
         <div className="max-w-xl w-full text-center relative z-10 anim-fadeup">
           <div className="inline-flex items-center gap-2 bg-zinc-900 border border-zinc-800 rounded-full px-4 py-2 text-xs text-purple-400 font-semibold tracking-widest uppercase mb-8">
             <span className="w-1.5 h-1.5 bg-green-400 rounded-full inline-block" style={{ animation: "glow 2s ease infinite" }} />
             Live simulation · Software Engineer
           </div>
-
           <h1 className="text-5xl md:text-6xl font-black mb-5 leading-[1.08] tracking-tight">
             Your first<br />
             <span className="text-transparent bg-clip-text" style={{ backgroundImage: "linear-gradient(135deg, #a855f7 0%, #ec4899 100%)" }}>
               week at a startup
             </span>
           </h1>
-
           <p className="text-gray-400 text-lg leading-relaxed mb-10 max-w-md mx-auto">
-            4 scenarios ripped from actual developer life. No tutorials.
-            No tricks. Just the job — raw and unfiltered.
+            4 scenarios ripped from actual developer life. No tutorials. No tricks. Just the job — raw and unfiltered.
           </p>
-
           <div className="grid grid-cols-2 gap-3 mb-10 text-left">
             {[
               { icon: "🔥", label: "Production is down", sub: "Day 1 · 9 AM" },
@@ -388,7 +322,6 @@ export default function SimulationPage() {
               </div>
             ))}
           </div>
-
           <button
             onClick={() => setPhase("scene")}
             className="relative w-full py-4 rounded-2xl font-bold text-lg overflow-hidden group"
@@ -404,7 +337,6 @@ export default function SimulationPage() {
     );
   }
 
-  // ── FINAL ─────────────────────────────────────────────────────────────────
   if (phase === "final" || scene?.isFinal) {
     const personality = getPersonality();
     return (
@@ -412,7 +344,6 @@ export default function SimulationPage() {
         <style>{CSS}</style>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none"
           style={{ background: "radial-gradient(circle, rgba(34,197,94,0.08) 0%, transparent 70%)" }} />
-
         <div className="max-w-xl w-full relative z-10 anim-fadeup">
           <div className="text-center mb-10">
             <div className="text-6xl mb-5">🚀</div>
@@ -421,8 +352,7 @@ export default function SimulationPage() {
               Friday · 10:02 AM · v2.4.0 shipped to production
             </div>
             <h1 className="text-4xl md:text-5xl font-black mb-4 leading-tight">
-              You shipped it.
-              <br />
+              You shipped it.<br />
               <span className="text-transparent bg-clip-text" style={{ backgroundImage: "linear-gradient(135deg, #4ade80, #2dd4bf)" }}>
                 47,000 people just got your update.
               </span>
@@ -433,8 +363,6 @@ export default function SimulationPage() {
               {" "}— and they're talking about code you wrote.
             </p>
           </div>
-
-          {/* Fake analytics */}
           <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-5 mb-5">
             <div className="flex items-center gap-2 mb-4">
               <div className="w-2 h-2 bg-green-400 rounded-full" style={{ animation: "glow 1.5s ease infinite" }} />
@@ -453,8 +381,6 @@ export default function SimulationPage() {
               ))}
             </div>
           </div>
-
-          {/* Dev personality */}
           <div className="rounded-2xl p-6 mb-5 border border-purple-500/25"
             style={{ background: "linear-gradient(135deg, rgba(147,51,234,0.12) 0%, rgba(219,39,119,0.08) 100%)" }}>
             <p className="text-xs text-purple-400 font-bold uppercase tracking-widest mb-3">Your developer personality</p>
@@ -468,8 +394,6 @@ export default function SimulationPage() {
               ))}
             </div>
           </div>
-
-          {/* Realities learned */}
           <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-5 mb-8">
             <p className="text-xs text-gray-600 uppercase tracking-widest font-semibold mb-4">What you just experienced</p>
             <div className="space-y-3">
@@ -487,10 +411,8 @@ export default function SimulationPage() {
               ))}
             </div>
           </div>
-
           <div className="flex gap-3">
-            <button onClick={() => navigate(-1)}
-              className="flex-1 border border-zinc-800 hover:border-zinc-600 transition py-3.5 rounded-2xl font-bold text-sm">
+            <button onClick={() => navigate(-1)} className="flex-1 border border-zinc-800 hover:border-zinc-600 transition py-3.5 rounded-2xl font-bold text-sm">
               ← Other careers
             </button>
             <button
@@ -505,12 +427,10 @@ export default function SimulationPage() {
     );
   }
 
-  // ── SCENE ─────────────────────────────────────────────────────────────────
   return (
-    <div className={`min-h-screen bg-black text-white px-6 py-12 transition-opacity duration-300 ${entering ? "opacity-0" : "opacity-100"}`}>
+    <div className="min-h-screen bg-black text-white px-6 py-12">
       <style>{CSS}</style>
 
-      {/* Trait toast */}
       {toast && (
         <div className="fixed top-5 right-5 z-50 anim-fadein">
           <div className={`flex items-center gap-2 border rounded-xl px-4 py-2.5 text-sm font-bold capitalize backdrop-blur-sm ${TRAIT_COLORS[toast] ?? "text-gray-300 border-gray-700 bg-zinc-900/90"}`}>
@@ -520,8 +440,6 @@ export default function SimulationPage() {
       )}
 
       <div className="max-w-2xl mx-auto">
-
-        {/* Progress */}
         <div className="flex items-center gap-3 mb-10">
           <div className="flex gap-1.5 flex-1">
             {scenes.slice(0, 4).map((_, i) => (
@@ -539,7 +457,6 @@ export default function SimulationPage() {
           <span className="text-xs text-gray-700 font-mono shrink-0">{sceneIndex + 1} / 4</span>
         </div>
 
-        {/* Scene header */}
         <div className="mb-7">
           <div className="flex items-center gap-3 mb-4">
             <span className="text-xs font-bold text-purple-400 tracking-widest bg-purple-400/10 border border-purple-400/20 px-3 py-1 rounded-full">
@@ -553,7 +470,6 @@ export default function SimulationPage() {
           <p className="text-gray-400 leading-relaxed">{scene.context}</p>
         </div>
 
-        {/* Slack messages */}
         {scene.slackMessages && (
           <div className="bg-zinc-950 border border-zinc-800 rounded-2xl overflow-hidden mb-5">
             <div className="flex items-center gap-2 px-4 py-2.5 border-b border-zinc-800/80">
@@ -564,7 +480,7 @@ export default function SimulationPage() {
               </div>
               <span className="text-xs font-mono text-gray-600 ml-2"># dev-alerts</span>
               <div className="ml-auto flex items-center gap-1.5">
-                <div className="w-1.5 h-1.5 bg-green-400 rounded-full" style={{ animation: "glow 2s ease infinite" }} />
+                <div className="w-1.5 h-1.5 bg-green-400 rounded-full" />
                 <span className="text-xs text-green-600 font-mono">live</span>
               </div>
             </div>
@@ -587,18 +503,16 @@ export default function SimulationPage() {
           </div>
         )}
 
-        {/* Error log */}
         {scene.errorLog && (
           <div className="border border-red-900/40 rounded-2xl p-4 mb-5" style={{ background: "rgba(127,29,29,0.12)" }}>
             <div className="flex items-center gap-2 mb-3">
-              <div className="w-2 h-2 bg-red-500 rounded-full" style={{ animation: "glow 1s ease infinite" }} />
+              <div className="w-2 h-2 bg-red-500 rounded-full" />
               <span className="text-xs font-mono text-red-400/80">error.log · live</span>
             </div>
             <pre className="font-mono text-xs text-red-300/70 leading-relaxed whitespace-pre-wrap">{scene.errorLog}</pre>
           </div>
         )}
 
-        {/* Code snippet */}
         {scene.codeSnippet && (
           <div className="bg-zinc-950 border border-zinc-800 rounded-2xl overflow-hidden mb-5">
             <div className="flex items-center justify-between px-4 py-2.5 border-b border-zinc-800">
@@ -612,7 +526,6 @@ export default function SimulationPage() {
           </div>
         )}
 
-        {/* Choices */}
         {(phase === "scene" || phase === "choosing") && (
           <div className="mt-6">
             <p className="text-xs text-gray-700 uppercase tracking-widest font-bold mb-3">What do you do?</p>
@@ -643,7 +556,6 @@ export default function SimulationPage() {
           </div>
         )}
 
-        {/* Loading */}
         {phase === "loading" && (
           <div className="mt-8 flex items-center gap-3 anim-fadein">
             <div className="flex gap-1">
@@ -656,17 +568,13 @@ export default function SimulationPage() {
           </div>
         )}
 
-        {/* Result */}
         {phase === "result" && (
           <div ref={resultRef} className="mt-6 anim-fadein">
-            {/* Your choice bubble */}
             <div className="flex justify-end mb-4">
               <div className="bg-purple-500/15 border border-purple-500/25 rounded-2xl rounded-tr-sm py-3 px-5 max-w-sm">
                 <p className="text-sm text-purple-200 leading-relaxed">{chosenOption?.text}</p>
               </div>
             </div>
-
-            {/* Mentor response */}
             <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-5 mb-5">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-8 h-8 rounded-lg bg-purple-500 flex items-center justify-center text-xs font-black">P</div>
@@ -686,7 +594,6 @@ export default function SimulationPage() {
                 )}
               </p>
             </div>
-
             {typingDone && (
               <button onClick={handleNext}
                 className="w-full py-4 rounded-2xl font-bold text-base anim-fadein"
