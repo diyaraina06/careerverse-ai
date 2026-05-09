@@ -178,30 +178,10 @@ function ReviewPage({ personality, traits, careerTitle, onSubmit }) {
             How was your<br />
             <span className="shimmer-text">week at the agency?</span>
           </h1>
-          <p className="text-gray-500 text-sm leading-relaxed">
-            You played as <span className="text-gray-300 font-medium">{personality?.type ?? "a versatile dev"}</span>.
-            Help us make the simulation better — takes 60 seconds.
-          </p>
+          
         </div>
 
-        {/* Personality recap pill */}
-        <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-4 mb-7 anim-fadeup stagger-1">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 text-lg"
-              style={{ background: "linear-gradient(135deg, rgba(147,51,234,0.3), rgba(219,39,119,0.2))" }}>
-              🧠
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-xs text-gray-600 uppercase tracking-widest font-semibold mb-0.5">You emerged as</p>
-              <p className="text-white font-display font-bold text-base truncate">{personality?.type ?? "The Versatile Dev"}</p>
-            </div>
-            <div className="flex flex-wrap gap-1.5 justify-end max-w-[140px]">
-              {[...new Set(traits)].slice(0, 3).map((t) => (
-                <span key={t} className="text-xs px-2 py-0.5 rounded-full bg-zinc-800 text-gray-400 capitalize border border-zinc-700">{t}</span>
-              ))}
-            </div>
-          </div>
-        </div>
+        
 
         {/* Ratings */}
         <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-5 mb-4 space-y-5 anim-fadeup stagger-2">

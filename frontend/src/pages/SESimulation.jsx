@@ -207,40 +207,23 @@ export default function SimulationPage() {
   const [sceneIndex, setSceneIndex]       = useState(0);
   const [phase, setPhase]                 = useState("intro");
   const [chosenOption, setChosenOption]   = useState(null);
-  const [aiResponse, setAiResponse]       = useState("");
-  const [aiLoading, setAiLoading]         = useState(false);
   const [traits, setTraits]               = useState([]);
   const [toast, setToast]                 = useState(null);
   const [hoveredChoice, setHoveredChoice] = useState(null);
   const resultRef = useRef(null);
   const scene = scenes[sceneIndex];
 
-  const { displayed: typedResponse, done: typingDone } = useTypingEffect(
-    aiResponse, 13, phase === "result"
-  );
-
   const showToast = (trait) => {
     setToast(trait);
     setTimeout(() => setToast(null), 2800);
   };
 
-  const handleChoice = async (choice) => {
+  const handleChoice = (choice) => {
     setChosenOption(choice);
-    setPhase("loading");
-    setAiLoading(true);
     setTraits((p) => [...p, choice.trait]);
     showToast(choice.trait);
-    try {
-      const text = await getAIResponse(scene, choice);
-      setAiResponse(text);
-    } catch {
-      setAiResponse(
-        "Solid instinct. Every real dev faces this exact call. The best ones learn from every outcome — good and bad. Tomorrow brings something harder."
-      );
-    }
-    setAiLoading(false);
     setPhase("result");
-    setTimeout(() => resultRef.current?.scrollIntoView({ behavior: "smooth", block: "center" }), 300);
+    setTimeout(() => resultRef.current?.scrollIntoView({ behavior: "smooth", block: "center" }), 150);
   };
 
   const handleNext = () => {
@@ -559,51 +542,21 @@ export default function SimulationPage() {
           </div>
         )}
 
-        {phase === "loading" && (
-          <div className="mt-8 flex items-center gap-3 anim-fadein">
-            <div className="flex gap-1">
-              {[0, 1, 2].map((i) => (
-                <div key={i} className="w-1.5 h-1.5 bg-purple-500 rounded-full"
-                  style={{ animation: `bounce 1s ease infinite ${i * 0.15}s` }} />
-              ))}
-            </div>
-            <span className="text-sm text-gray-600">Priya is typing...</span>
-          </div>
-        )}
-
         {phase === "result" && (
           <div ref={resultRef} className="mt-6 anim-fadein">
-            <div className="flex justify-end mb-4">
+            <div className="flex justify-end mb-5">
               <div className="bg-purple-500/15 border border-purple-500/25 rounded-2xl rounded-tr-sm py-3 px-5 max-w-sm">
                 <p className="text-sm text-purple-200 leading-relaxed">{chosenOption?.text}</p>
-              </div>
-            </div>
-            <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-5 mb-5">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-8 h-8 rounded-lg bg-purple-500 flex items-center justify-center text-xs font-black">P</div>
-                <div>
-                  <p className="text-sm font-bold text-white">Priya · Tech Lead</p>
-                  <p className="text-xs text-gray-600">your mentor</p>
-                </div>
-                <span className={`ml-auto text-xs px-2.5 py-0.5 rounded-full border capitalize ${TRAIT_COLORS[chosenOption?.trait] ?? ""}`}>
+                <span className={`inline-block mt-2 text-xs px-2.5 py-0.5 rounded-full border capitalize ${TRAIT_COLORS[chosenOption?.trait] ?? "text-gray-400 border-gray-700"}`}>
                   {chosenOption?.trait}
                 </span>
               </div>
-              <p className="text-gray-300 text-sm leading-relaxed">
-                {typedResponse}
-                {!typingDone && (
-                  <span className="inline-block w-0.5 h-3.5 bg-purple-400 ml-0.5 align-middle"
-                    style={{ animation: "blink 0.8s step-end infinite" }} />
-                )}
-              </p>
             </div>
-            {typingDone && (
-              <button onClick={handleNext}
-                className="w-full py-4 rounded-2xl font-bold text-base anim-fadein"
-                style={{ background: "linear-gradient(135deg, #9333ea, #db2777)" }}>
-                {sceneIndex < 3 ? "Next scene →" : "See how the week ends →"}
-              </button>
-            )}
+            <button onClick={handleNext}
+              className="w-full py-4 rounded-2xl font-bold text-base"
+              style={{ background: "linear-gradient(135deg, #9333ea, #db2777)" }}>
+              {sceneIndex < 3 ? "Next scene →" : "See how the week ends →"}
+            </button>
           </div>
         )}
       </div>

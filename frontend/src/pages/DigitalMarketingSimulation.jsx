@@ -294,7 +294,7 @@ export default function DigitalMarketingSimulation() {
       setSceneIndex(next);
       setPhase(scenes[next]?.isFinal ? "final" : "scene");
       setChosenOption(null);
-      setAiResponse("");
+
     }, 300);
   };
 
