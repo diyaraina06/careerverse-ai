@@ -277,50 +277,72 @@ function QuizPage() {
     },
   ];
 
-  const handleAnswer = (option) => {
-    const answerObject = {
-      question: questions[currentQuestion].question,
-      selectedAnswer: option.text,
-      category: option.category,
-      trait: option.trait,
-    };
-
-    const updatedAnswers = [...answers, answerObject];
-
-    setAnswers(updatedAnswers);
-
-    if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
-    } else {
-      const counts = {
-        logical: 0,
-        design: 0,
-        leadership: 0,
-        marketing: 0,
-      };
-
-      updatedAnswers.forEach((answer) => {
-        counts[answer.category]++;
-      });
-
-      const topCategory = Object.keys(counts).reduce((a, b) =>
-        counts[a] > counts[b] ? a : b
-      );
-
-      console.log(updatedAnswers);
-
-      setLoading(true);
-
-      setTimeout(() => {
-        navigate("/results", {
-          state: {
-            selectedCareer: topCategory,
-            answers: updatedAnswers,
-          },
-        });
-      }, 2500);
-    }
+  // Map quiz answers array → the profile shape your backend expects
+const buildProfile = (updatedAnswers) => {
+  return {
+    grade: "9-12",                              // you can add a grade question later
+    activity: updatedAnswers[0]?.selectedAnswer ?? "",   // Q1
+    subject: updatedAnswers[1]?.selectedAnswer ?? "",    // Q2
+    weekend: updatedAnswers[2]?.selectedAnswer ?? "",    // Q3 (repurposed)
+    workStyle: updatedAnswers[3]?.selectedAnswer ?? "",  // Q4
+    workplace: updatedAnswers[4]?.selectedAnswer ?? "",  // Q5
+    thinkingStyle: updatedAnswers[5]?.selectedAnswer ?? "", // Q6
+    values: updatedAnswers[6]?.selectedAnswer ?? "",     // Q7
+    approach: updatedAnswers[7]?.selectedAnswer ?? "",   // Q8
+    awareness: updatedAnswers[8]?.selectedAnswer ?? "",  // Q9
+    // bonus: pass traits too so AI has more signal
+    traits: updatedAnswers.map((a) => a.trait).join(", "),
   };
+};
+
+// Call YOUR backend route — not Anthropic directly
+const callCareerAPI = async (profile) => {
+  const response = await fetch("http://localhost:5000/api/careers/recommend", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ profile }),  // backend expects { profile: {...} }
+  });
+
+  if (!response.ok) {
+    throw new Error(`Server error: ${response.status}`);
+  }
+
+  const careers = await response.json();
+  return careers;
+};
+
+// Replace your existing handleAnswer with this
+const handleAnswer = async (option) => {
+  const answerObject = {
+    question: questions[currentQuestion].question,
+    selectedAnswer: option.text,
+    category: option.category,
+    trait: option.trait,
+  };
+
+  const updatedAnswers = [...answers, answerObject];
+  setAnswers(updatedAnswers);
+
+  if (currentQuestion < questions.length - 1) {
+    setCurrentQuestion(currentQuestion + 1);
+  } else {
+    // Last question — build profile and hit your backend
+    setLoading(true);
+    try {
+      const profile = buildProfile(updatedAnswers);
+      console.log("Sending profile to backend:", profile); // debug
+      const careers = await callCareerAPI(profile);
+      navigate("/results", {
+        state: { careers },
+      });
+    } catch (err) {
+      console.error("Career API failed:", err);
+      setLoading(false);
+    }
+  }
+};
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center px-6 py-10">
