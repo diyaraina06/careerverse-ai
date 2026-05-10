@@ -297,7 +297,7 @@ function QuizPage() {
 
   // Call YOUR backend route — not Anthropic directly
   const callCareerAPI = async (profile) => {
-    const response = await fetch("http://localhost:5000/api/careers/recommend", {
+    const response = await fetch("https://careerverse-ai-vi36.onrender.com/api/careers/recommend", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
