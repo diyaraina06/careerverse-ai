@@ -310,6 +310,7 @@ function QuizPage() {
     }
 
     const careers = await response.json();
+    console.log("AI Careers Response:", careers);
     return careers;
   };
 
@@ -333,14 +334,15 @@ function QuizPage() {
       try {
         const profile = buildProfile(updatedAnswers);
         console.log("Sending profile to backend:", profile); // debug
-        const careers = [
-          {
-            title: "Digital Marketing Manager",
-            match: "94%",
-            description:
-              "You enjoy creativity, communication, branding, and audience engagement.",
-          },
-        ];
+        // const careers = [
+        //   {
+        //     title: "Digital Marketing Manager",
+        //     match: "94%",
+        //     description:
+        //       "You enjoy creativity, communication, branding, and audience engagement.",
+        //   },
+        // ];
+        const careers = await response.json();
         navigate("/results", {
           state: { careers },
         });

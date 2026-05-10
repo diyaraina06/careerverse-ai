@@ -6,6 +6,7 @@ function CareerResultsPage() {
 
   // Pull the real AI careers from quiz navigation state
   const careers = location.state?.careers ?? [];
+  console.log(careers);
 
   if (careers.length === 0) {
     return (
