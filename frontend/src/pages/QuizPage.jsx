@@ -343,9 +343,12 @@ function QuizPage() {
         //   },
         // ];
         const careers = await response.json();
-        navigate("/results", {
-          state: { careers },
-        });
+        localStorage.setItem(
+          "careerverse_careers",
+          JSON.stringify(careers)
+        );
+
+        navigate("/results");
       } catch (err) {
         console.error("Career API failed:", err);
         setLoading(false);

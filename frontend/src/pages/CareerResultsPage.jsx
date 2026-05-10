@@ -2,10 +2,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 function CareerResultsPage() {
   const navigate = useNavigate();
-  const location = useLocation();
-
+  // const location = useLocation();
+  const careers = JSON.parse(
+    localStorage.getItem("careerverse_careers")
+  ) || [];
   // Pull the real AI careers from quiz navigation state
-  const careers = location.state?.careers ?? [];
+  // const careers = location.state?.careers ?? [];
   console.log(careers);
 
   if (careers.length === 0) {
@@ -84,19 +86,19 @@ function CareerResultsPage() {
               </p>
 
               <button
-  onClick={() => {
-    if (career.title.toLowerCase().includes("software")) {
-      navigate("/simulation/software", { state: { career } });
-    } else if (career.title.toLowerCase().includes("marketing")) {
-      navigate("/simulation/marketing", { state: { career } });
-    } else {
-      alert("Simulation not available for this career yet!");
-    }
-  }}
-  className="w-full bg-purple-500 hover:bg-purple-600 transition py-3 rounded-2xl font-semibold"
->
-  Try Simulation →
-</button>
+                onClick={() => {
+                  if (career.title.toLowerCase().includes("software")) {
+                    navigate("/simulation/software", { state: { career } });
+                  } else if (career.title.toLowerCase().includes("marketing")) {
+                    navigate("/simulation/marketing", { state: { career } });
+                  } else {
+                    alert("Simulation not available for this career yet!");
+                  }
+                }}
+                className="w-full bg-purple-500 hover:bg-purple-600 transition py-3 rounded-2xl font-semibold"
+              >
+                Try Simulation →
+              </button>
 
             </div>
           ))}
