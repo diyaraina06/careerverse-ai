@@ -331,24 +331,21 @@ function QuizPage() {
     } else {
       // Last question — build profile and hit your backend
       setLoading(true);
+
       try {
         const profile = buildProfile(updatedAnswers);
-        console.log("Sending profile to backend:", profile); // debug
-        // const careers = [
-        //   {
-        //     title: "Digital Marketing Manager",
-        //     match: "94%",
-        //     description:
-        //       "You enjoy creativity, communication, branding, and audience engagement.",
-        //   },
-        // ];
-        const careers = await response.json();
+
+        console.log("Sending profile to backend:", profile);
+
+        const careers = await callCareerAPI(profile);
+
         localStorage.setItem(
           "careerverse_careers",
           JSON.stringify(careers)
         );
 
         navigate("/results");
+
       } catch (err) {
         console.error("Career API failed:", err);
         setLoading(false);
